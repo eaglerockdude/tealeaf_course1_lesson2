@@ -143,13 +143,11 @@ class Game_Engine
   BLACKJACK = 21
 
   def initialize
+    init_vars
     @deck = Deck.new
     @deck.shuffle_the_deck!
     @player = Player.new("Player")
     @house = Dealer.new
-    @game_over = false
-    @house_stands = false
-    @player_stands = false
     show_rules
     @player.new_card(@deck.deal_a_card)
     @player.new_card(@deck.deal_a_card)
@@ -159,6 +157,12 @@ class Game_Engine
     @house.show_hand
     compare_hands
     @house.house_AI
+  end
+
+  def init_vars
+    @game_over = false
+    @house_stands = false
+    @player_stands = false
   end
 
   def show_rules
