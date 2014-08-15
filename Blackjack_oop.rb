@@ -184,7 +184,10 @@ class Game_Engine
     player_turn
     house_turn
     compare_hands
-    @house.house_AI
+    next_step = @house.house_AI
+    if next_step == STAND
+      @house_stands = true
+    end
 
   end  #while loop
 
@@ -204,7 +207,7 @@ class Game_Engine
         elsif player_decision == HIT
           @player.new_card(@deck.deal_a_card)
           @player.show_hand
-        elsif player_decision = STAND
+        elsif player_decision == STAND
          @player_stands = true
          puts "Player stands pat."
           puts ""
@@ -253,8 +256,12 @@ class Game_Engine
         puts "House went bust! You win."
         @game_over = true
       elsif
-      player_stands == true && @house.total > @player.total
+      @player_stands == true && @house.total > @player.total
         puts "The house has won with #{@house.total}!"
+        @game_over = true
+      elsif
+        @player_stands == true && @house_stands == true
+        puts "Both parties Stand..Game over!"
         @game_over = true
       end
   end
