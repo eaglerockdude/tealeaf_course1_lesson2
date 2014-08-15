@@ -108,10 +108,10 @@ class Dealer
   end
 
   def house_AI
-
+    @house_next_step = HIT
     if @total <=17
       @house_next_step = HIT
-    elsif @total <= 19
+    elsif @total <= 20
       @house_next_step = STAND
     end
     @house_next_step
@@ -134,7 +134,7 @@ end  #class
 
 class Game_Engine
 
-  attr_accessor :deck,:game_over,:player,:house,:player_stands,:house_stands
+  attr_accessor :deck,:game_over,:player,:house,:player_stands,:house_stands,:next_step
 
   HIT = "h"
   STAND = "s"
@@ -184,8 +184,8 @@ class Game_Engine
     player_turn
     house_turn
     compare_hands
-    next_step = @house.house_AI
-    if next_step == STAND
+    @next_step = @house.house_AI
+    if @next_step == STAND
       @house_stands = true
     end
 
